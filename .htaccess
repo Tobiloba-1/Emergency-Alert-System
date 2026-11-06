@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteBase /eass/public/
+
+# Any URL ending in .php (except the front controller itself) goes to the router, which 404s it.
+RewriteCond %{REQUEST_URI} \.php$ [NC]
+RewriteCond %{REQUEST_URI} !/index\.php$ [NC]
+RewriteRule ^ index.php [L]
+
+# Real files (js, css, images) are served directly; everything else goes to the router.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
